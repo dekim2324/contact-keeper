@@ -27,7 +27,17 @@ const AuthState = props => {
     // Actions below 
 
     // Load User
-    const loadUser = () => console.log('Load User')
+    const loadUser = async () => {
+        //@todo - load header into global headers
+        
+        try {
+            const res = await axios.get('/api/auth');
+
+            dispatch({ type: USER_LOADED, payload: res.data })
+        } catch (err) {
+            dispatch({ type: AUTH_ERROR })
+        }
+    }
 
     // Register User
     const register = async formData => {
